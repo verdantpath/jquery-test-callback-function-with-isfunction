@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>JQuery Test Callback Fucntions With isFunction</title>
+
+</head>
+<body>
+<ul>
+  <li class="animals">Rabbit</li>
+  <li class="animals">Dog</li>
+  <li class="animals">Cat</li>
+  <li class="animals">Pig</li>
+  <li class="animals">Shetland</li>
+</ul>
+
+<ul>
+  <li class="horses">Arabian</li>
+  <li class="horses">Shetland</li>
+  <li class="horses">Shetland</li>
+  <li class="horses">Clydesdale</li>
+</ul>
+
+<ul id="animals">
+
+</ul>
+
+<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script type="text/Javascript">
+(function($) {
+  $.fn.myPlugin = function(settings) {
+      return this.each(function() {
+        settings = $.extend({ onShow: null }, settings);
+        $(this).show();
+        if ( $.isFunction( settings.onShow ) ) {
+          settings.onShow.call(this);
+        }
+      });
+  };
+  $(document).ready(function() {
+    $('div').myPlugin({
+      onShow: function() {
+        alert('My callback');
+      }
+    });
+  });
+})(jQuery);
+
+// (function($) {
+//   $.fn.myPlugin = function(settings) {
+//       return this.each(function() {
+//         settings = $.extend({ onShow: null }, settings);
+//         $(this).show();
+//         if ( $.isFunction( settings.onShow ) ) {
+//           settings.onShow.call(this);
+//         }
+//       });
+//     };
+//     $(document).ready(function() {
+//       $('div').myPlugin({
+//         onShow: function() {
+//           alert('My callback!');
+//         }
+//       });
+//     });
+// })(jQuery);
+
+
+</script>
+</body>
+</html>
